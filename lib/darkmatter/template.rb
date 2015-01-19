@@ -8,7 +8,7 @@ module ActionView
 
     alias_method :_old_render, :render
     def render(view, locals, buffer=nil, &block)
-      view.instance_variable_set(:@page, @data)
+      view.instance_variable_set(:@page_data, OpenStruct.new(@data)) if not view.instance_variable_get(:@page_data)
       _old_render(view, locals, buffer, &block)
     end
 
